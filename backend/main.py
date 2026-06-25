@@ -103,7 +103,7 @@ def ask_question(req: QuestionRequest):
 
     retriever = vector_stores[req.session_id].as_retriever(search_kwargs={"k": 4})
 
-    llm = ChatGroq(model="llama3-8b-8192", api_key=groq_api_key, temperature=0)
+    llm = ChatGroq(model="llama-3.1-8b-instant", api_key=groq_api_key, temperature=0)
 
     prompt = ChatPromptTemplate.from_messages([
         (
