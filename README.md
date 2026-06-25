@@ -1,12 +1,3 @@
----
-title: PDF Chat API
-emoji: 🔧
-colorFrom: gray
-colorTo: gray
-sdk: docker
-pinned: false
----
-
 # PDF Chat
 
 🚀 **[Live demo on Hugging Face Spaces](https://huecraft143-pdf-chat.hf.space)**
