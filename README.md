@@ -9,6 +9,9 @@ pinned: false
 
 # PDF Chat
 
+🚀 **[Live demo on Hugging Face Spaces](https://huecraft143-pdf-chat.hf.space)**
+> Running on the free tier — first run could be tediuouss
+
 > A production-ready RAG pipeline that lets users chat with any PDF. Built with LangChain, ChromaDB, and FastAPI.
 
 ## Architecture
@@ -29,7 +32,7 @@ Frontend (Streamlit)  →  Backend (FastAPI)  →  ChromaDB (local)
 | Backend | FastAPI + LangChain |
 | Vector store | ChromaDB (local) |
 | Embeddings | sentence-transformers/all-MiniLM-L6-v2 |
-| LLM | Groq API (llama3-8b-8192) |
+| LLM | Groq API (llama-3.1-8b-instant) |
 | Frontend | Streamlit |
 
 ## Quickstart
