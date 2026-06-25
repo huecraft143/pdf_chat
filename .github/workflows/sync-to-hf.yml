@@ -9,12 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: huggingface/hub-sync@v0.1.0
-        with:
-          github_repo_id: ${{ github.repository }}
-          huggingface_repo_id: huecraft143/pdf-chat-api
-          hf_token: ${{ secrets.HF_TOKEN }}
-          space_sdk: docker
+      - name: Prepare backend files
+        run: |
+          mkdir -p /tmp/hf-backend
+          cp Dockerfile /tmp/hf-backend/Dockerfile
+          cp backend/main.py /tmp/hf-backend/main.py
+          cp backend/requirements.txt /tmp/hf-backend/requirements.txt
+          cat > /tmp/hf-backend/README.md << 'EOF'
+          ---
+          title: PDF Chat API
+          emoji: 🔧
+          colorFrom: gray
+          colorTo: gray
+          sdk: docker
+          pinned: false
+          ---
+          EOF
+      - name: Push to HF backend Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd /tmp/hf-backend
+          git init
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -m "sync from GitHub"
+          git branch -m master main
+          git push --force https://huecraft143:$HF_TOKEN@huggingface.co/spaces/huecraft143/pdf-chat-api main
 
   sync-frontend:
     runs-on: ubuntu-latest
