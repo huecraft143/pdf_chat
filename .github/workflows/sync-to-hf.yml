@@ -47,4 +47,5 @@ jobs:
           git config user.name "GitHub Action"
           git add .
           git commit -m "sync from GitHub"
+          git branch -m master main
           git push --force https://huecraft143:$HF_TOKEN@huggingface.co/spaces/huecraft143/pdf-chat main

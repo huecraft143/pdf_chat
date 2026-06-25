@@ -1,3 +1,12 @@
+---
+title: PDF Chat API
+emoji: 🔧
+colorFrom: gray
+colorTo: gray
+sdk: docker
+pinned: false
+---
+
 # PDF Chat
 
 > A production-ready RAG pipeline that lets users chat with any PDF. Built with LangChain, ChromaDB, and FastAPI.
