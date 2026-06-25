@@ -1,0 +1,50 @@
+name: Sync to Hugging Face Hub
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: huggingface/hub-sync@v0.1.0
+        with:
+          github_repo_id: ${{ github.repository }}
+          huggingface_repo_id: huecraft143/pdf-chat-api
+          hf_token: ${{ secrets.HF_TOKEN }}
+          space_sdk: docker
+
+  sync-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Prepare frontend files
+        run: |
+          mkdir -p /tmp/hf-frontend
+          cp frontend/app.py /tmp/hf-frontend/app.py
+          cp frontend/requirements.txt /tmp/hf-frontend/requirements.txt
+          cat > /tmp/hf-frontend/README.md << 'EOF'
+          ---
+          title: PDF Chat
+          emoji: 📄
+          colorFrom: blue
+          colorTo: purple
+          sdk: streamlit
+          sdk_version: 1.39.0
+          app_file: app.py
+          pinned: false
+          ---
+          EOF
+      - name: Push to HF frontend Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd /tmp/hf-frontend
+          git init
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -m "sync from GitHub"
+          git push --force https://huecraft143:$HF_TOKEN@huggingface.co/spaces/huecraft143/pdf-chat main
