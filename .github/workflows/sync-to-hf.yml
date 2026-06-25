@@ -13,8 +13,8 @@ jobs:
         run: |
           mkdir -p /tmp/hf-backend
           cp Dockerfile /tmp/hf-backend/Dockerfile
-          cp backend/main.py /tmp/hf-backend/main.py
-          cp backend/requirements.txt /tmp/hf-backend/requirements.txt
+          cp backend/main.py /tmp/hf-backend/backend/main.py
+          cp backend/requirements.txt /tmp/hf-backend/backend/requirements.txt
           cat > /tmp/hf-backend/README.md << 'EOF'
           ---
           title: PDF Chat API
